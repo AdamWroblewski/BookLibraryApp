@@ -28,12 +28,14 @@ export class BookFormComponent implements OnInit {
   addBook(form: NgForm): void {
     this.service.addBook().subscribe(() => {
       this.service.refreshList();
+      this.resetForm(form);
     });
   }
 
   putBook(form: NgForm): void {
     this.service.putBook().subscribe(() => {
       this.service.refreshList();
+      this.resetForm(form);
     });
   }
 
@@ -42,3 +44,4 @@ export class BookFormComponent implements OnInit {
     form.form.reset();
   }
 }
+
