@@ -11,10 +11,16 @@ import {LoginComponent} from './user/login/login.component';
 import {RegisterComponent} from './user/register/register.component';
 import {AppRoutingModule} from './app-routing.module';
 import {RouterModule, Routes} from '@angular/router';
-import { UserComponent } from './user/user.component';
+import {UserComponent} from './user/user.component';
+import {JwtModule} from '@auth0/angular-jwt';
+import {AuthService} from './shared/auth.service';
+
+export function tokenGetter() {
+  return localStorage.getItem('jwt');
+}
 
 const routes: Routes = [
-  {path: '', component: BookComponentComponent},
+  {path: '', component: BookComponentComponent, canActivate: [AuthService]},
   {path: 'user', component: UserComponent}
 ];
 
@@ -32,7 +38,14 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:44369'],
+        disallowedRoutes: []
+      }
+    })
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

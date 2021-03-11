@@ -1,12 +1,13 @@
 <h4 class="text-center">Login</h4>
-<form #form="ngForm" (submit)="loginUser(form)">
+<form #form="ngForm" (ngSubmit)="loginUser(form)">
+  <div *ngIf="invalidLogin" class="alert alert-danger">Invalid login data</div>
   <div class="form-group">
     <label>Login</label>
-    <input class="form-control" name="userName" [(ngModel)]="userService.userLogin.userName">
+    <input required class="form-control" name="userName" [(ngModel)]="userService.userLogin.userName">
   </div>
   <div class="form-group">
     <label>Password</label>
-    <input type="password" class="form-control" name="password" [(ngModel)]="userService.userLogin.password">
+    <input required type="password" class="form-control" name="password" [(ngModel)]="userService.userLogin.password">
     <button class="btn btn-primary w-100 mt-4">Login</button>
   </div>
 </form>
