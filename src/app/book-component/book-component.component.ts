@@ -18,7 +18,6 @@ export class BookComponentComponent implements OnInit {
 
   deleteBook(id: number): void {
     this.service.deleteBook(id).subscribe(() => {
-      console.log(id);
       this.service.refreshList();
     });
   }
