@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {User} from '../../shared/user.model';
+import {UserService} from '../../shared/user.service';
 
 @Component({
   selector: 'app-register',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(public userService: UserService) {
+  }
 
   ngOnInit(): void {
   }
