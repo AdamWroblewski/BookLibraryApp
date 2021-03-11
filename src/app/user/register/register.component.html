@@ -1,20 +1,20 @@
 <h4 class="text-center">Register</h4>
-<form class=" col-lg-6">
+<form #form="ngForm" class="col-lg-6" (submit)="register(form)">
   <div class="form-group">
     <label>Login</label>
-    <input class="form-control">
+    <input class="form-control" name="userName" [(ngModel)]="userService.user.userName">
   </div>
   <div class="form-group">
     <label>Email</label>
-    <input class="form-control">
+    <input class="form-control" name="emailAddress" [(ngModel)]="userService.user.emailAddress">
   </div>
   <div class="form-group">
     <label>Password</label>
-    <input type="password" class="form-control">
+    <input type="password" class="form-control" name="password" [(ngModel)]="userService.user.password">
   </div>
   <div class="form-group">
     <label>Repeat password</label>
-    <input type="password" class="form-control">
+    <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="userService.user.confirmPassword">
   </div>
   <button type="submit" class="btn btn-primary mt-4 w-100">Submit</button>
 </form>
