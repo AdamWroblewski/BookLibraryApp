@@ -20,6 +20,7 @@ export class BookComponentComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('jwt');
+    this.router.navigate(['user']);
   }
 
   deleteBook(id: number): void {
