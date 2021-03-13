@@ -21,6 +21,6 @@ export class UserService {
   }
 
   public loginUser(): Observable<any> {
-    return this.http.post(`${this.appUrl}/login`, this.userLogin);
+    return this.http.post(`${this.appUrl}/authenticate`, this.userLogin);
   }
 }

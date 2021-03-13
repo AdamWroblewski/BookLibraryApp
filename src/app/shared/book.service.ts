@@ -30,9 +30,11 @@ export class BookService {
 
   public refreshList(): void {
     this.http.get(this.appUrl)
-      .toPromise()
-      .then(res => {
-        this.books = res as Book[];
-      });
+      .subscribe(res => {
+          this.books = res as Book[];
+        },
+        () => {
+          console.log('Couldn\'t fetch books!');
+        });
   }
 }
