@@ -13,8 +13,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register(form: NgForm): void {
-    console.log(this.userService.userRegister.password);
-    console.log(this.userService.userRegister.userName);
     this.userService.registerUser()
       .subscribe(res => {
         console.log(res);

@@ -1,33 +1,41 @@
-<form #form="ngForm" (submit)="onSubmit(form)">
+<form #form="ngForm" (submit)="onSubmit(form)" autocomplete="off">
   <div class="form-group">
     <input type="hidden" name="id" [value]="service.book.id">
   </div>
+
+<!--  title -->
   <div class="form-group">
     <label>Book title</label>
     <input required class="form-control" #title="ngModel" name="title" [(ngModel)]="service.book.title">
+    <div class="text-danger" *ngIf="(!title.valid && title.touched) || (!title.valid && !formValid)">Title can't be
+      empty
+    </div>
   </div>
+
+<!--  author-->
   <div class="form-group">
     <label>Author</label>
     <input required class="form-control" #author="ngModel" name="author" [(ngModel)]="service.book.author">
+    <div class="text-danger" *ngIf="(!author.valid && author.touched ) || (!author.valid && !formValid)">Author can't be
+      empty
+    </div>
   </div>
+
+<!--  release year-->
   <div class="form-group">
     <label>Release year</label>
     <input required id="date" class="form-control" #year="ngModel" name="releaseYear" type="number"
            [(ngModel)]="service.book.releaseYear"
            oninput="this.value = Math.round(this.value)">
+    <div class="text-danger" *ngIf="!year.valid && year.touched">Field can't be empty</div>
   </div>
+
+<!--  number of pages-->
   <div class="form-group">
     <label>Number of pages</label>
     <input required min="0" class="form-control" #pages="ngModel" name="numberOfPages" type="number" step="1"
            oninput="this.value = Math.round(this.value);" [(ngModel)]="service.book.numberOfPages">
   </div>
-  <button type="submit" class="btn btn-primary mt-4 w-100" (click)="isClicked=true">Submit</button>
-  <div class="text-danger" *ngIf="(!title.valid && title.touched) || (!title.valid && !formValid)">Title can't be
-    empty
-  </div>
-  <div class="text-danger" *ngIf="(!author.valid && author.touched ) || (!author.valid && !formValid)">Author can't be
-    empty
-  </div>
-  <div class="text-danger" *ngIf="pages.value<0">There can't be negative number of pages</div>
-  <div class="text-danger" *ngIf="pages.value<0">There can't be negative number of pages</div>
+  <div class="text-danger" *ngIf="!pages.valid && pages.touched">Field can't be empty</div>
+  <button [disabled]="!form.valid" type="submit" class="btn btn-primary mt-4 w-100" (click)="isClicked=true">Submit</button>
 </form>
