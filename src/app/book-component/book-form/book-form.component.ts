@@ -14,6 +14,10 @@ export class BookFormComponent implements OnInit {
   constructor(public service: BookService, public pipe: DatePipe) {
   }
 
+  isClicked = false;
+  formValid = true;
+  isSaved = false;
+
   ngOnInit(): void {
   }
 
@@ -27,21 +31,31 @@ export class BookFormComponent implements OnInit {
 
   addBook(form: NgForm): void {
     this.service.addBook().subscribe(() => {
-      this.service.refreshList();
-      this.resetForm(form);
-    });
+        this.service.refreshList();
+        this.resetForm(form);
+        this.isSaved = true;
+      },
+      (error) => {
+        this.formValid = false;
+        console.log(error.message);
+      });
   }
 
   putBook(form: NgForm): void {
     this.service.putBook().subscribe(() => {
-      this.service.refreshList();
-      this.resetForm(form);
-    });
+        this.service.refreshList();
+        this.resetForm(form);
+        this.isSaved = true;
+      },
+      (error) => {
+        this.formValid = false;
+        console.log(error.message);
+      });
   }
 
   resetForm(form: NgForm): void {
-    this.service.book = new Book();
     form.form.reset();
+    this.service.book = new Book();
   }
 }
 

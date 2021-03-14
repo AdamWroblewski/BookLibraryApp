@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../shared/user.service';
 import {NgForm} from '@angular/forms';
 import {Router} from '@angular/router';
+import {UserLogin} from '../../shared/user-login.model';
 
 @Component({
   selector: 'app-login',
@@ -24,8 +25,9 @@ export class LoginComponent implements OnInit {
       .subscribe(res => {
           const token = res.token;
           localStorage.setItem('jwt', token);
+          this.userService.userLogin = new UserLogin();
           this.invalidLogin = false;
-          this.router.navigate(['/']);
+          this.router.navigate(['/book']);
         },
         error => {
           this.invalidLogin = true;

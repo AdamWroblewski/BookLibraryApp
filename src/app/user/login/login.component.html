@@ -4,20 +4,22 @@
     <label>Login</label>
     <input required class="form-control" name="userName" #userName="ngModel"
            [(ngModel)]="userService.userLogin.userName">
+    <div class="text-danger"
+         *ngIf="!userName.valid && userName.touched
+       || (invalidLogin && !userName.dirty)">Login field can't be empty
+    </div>
   </div>
   <div class="form-group">
     <label>Password</label>
     <input required type="password" class="form-control" name="password" #password="ngModel"
            [(ngModel)]="userService.userLogin.password">
+    <div class="text-danger"
+         *ngIf="(!password.valid && password.touched)
+       || (invalidLogin && !password.dirty)">Password field can't be empty
+    </div>
     <button class="btn btn-primary w-100 mt-4">Login</button>
   </div>
-  <div class="alert alert-danger mt-4" role="alert" *ngIf="invalidLogin">
-    <div>Wrong login or password</div>
+  <div class="text-danger mt-2" role="alert" *ngIf="invalidLogin">
+    Wrong login or password
   </div>
-  <div class="alert alert-danger mt-2"
-       *ngIf="!userName.valid && userName.touched
-       || (invalidLogin && !userName.dirty)">Login field can't be empty</div>
-  <div class="alert alert-danger mt-2"
-       *ngIf="(!password.valid && password.touched)
-       || (invalidLogin && !password.dirty)">Password field can't be empty</div>
 </form>

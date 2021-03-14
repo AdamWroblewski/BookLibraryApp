@@ -4,21 +4,30 @@
   </div>
   <div class="form-group">
     <label>Book title</label>
-    <input class="form-control" name="title" [(ngModel)]="service.book.title">
+    <input required class="form-control" #title="ngModel" name="title" [(ngModel)]="service.book.title">
   </div>
   <div class="form-group">
     <label>Author</label>
-    <input class="form-control" name="author" [(ngModel)]="service.book.author">
+    <input required class="form-control" #author="ngModel" name="author" [(ngModel)]="service.book.author">
   </div>
   <div class="form-group">
     <label>Release year</label>
-    <input id="date" class="form-control" name="releaseYear" type="number" [(ngModel)]="service.book.releaseYear"
+    <input required id="date" class="form-control" #year="ngModel" name="releaseYear" type="number"
+           [(ngModel)]="service.book.releaseYear"
            oninput="this.value = Math.round(this.value)">
   </div>
   <div class="form-group">
     <label>Number of pages</label>
-    <input class="form-control" name="numberOfPages" type="number" step="1"
+    <input required min="0" class="form-control" #pages="ngModel" name="numberOfPages" type="number" step="1"
            oninput="this.value = Math.round(this.value);" [(ngModel)]="service.book.numberOfPages">
   </div>
-  <button type="submit" class="btn btn-primary mt-4 w-100">Submit</button>
+  <button type="submit" class="btn btn-primary mt-4 w-100" (click)="isClicked=true">Submit</button>
+  <div class="text-danger" *ngIf="(!title.valid && title.touched) || (!title.valid && !formValid)">Title can't be
+    empty
+  </div>
+  <div class="text-danger" *ngIf="(!author.valid && author.touched ) || (!author.valid && !formValid)">Author can't be
+    empty
+  </div>
+  <div class="text-danger" *ngIf="pages.value<0">There can't be negative number of pages</div>
+  <div class="text-danger" *ngIf="pages.value<0">There can't be negative number of pages</div>
 </form>

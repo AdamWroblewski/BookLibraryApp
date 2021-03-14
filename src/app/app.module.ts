@@ -20,8 +20,8 @@ export function tokenGetter() {
 }
 
 const routes: Routes = [
-  {path: '', component: BookComponentComponent, canActivate: [AuthService]},
-  {path: 'user', component: UserComponent}
+  {path: 'book', component: BookComponentComponent, canActivate: [AuthService]},
+  {path: '', component: UserComponent}
 ];
 
 @NgModule({
