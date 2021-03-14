@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../shared/user.service';
-import {NgForm, NgModel} from '@angular/forms';
+import {NgForm, NgModel, NgModelGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -12,26 +12,46 @@ export class RegisterComponent implements OnInit {
   constructor(public userService: UserService) {
   }
 
+  isFormInvalid = false;
+
+  passwordErrors = {
+    numberOfLetters: 'Password must contain at least 8 characters',
+    smallLetters: 'Password must contain at least 1 lowercase letter',
+    capitalLetters: 'Password must contain at least 1 uppercase letter',
+    specialSymbol: 'Password must contain at least 1 non alphanumeric character',
+    digit: 'Password must contain at least 1 digit'
+  };
+
   register(form: NgForm): void {
     this.userService.registerUser()
       .subscribe(res => {
-        console.log(res);
-      });
+          console.log(res);
+        },
+        error => console.log(error.message));
   }
 
-  isLoginValid(model: NgModel): boolean {
-    if (model.touched && (model.model === undefined || model.model.length < 6)) {
-      return false;
-    }
-    return true;
+  isRepeatPasswordValid(password: NgModel, confirmPassword: NgModel): boolean {
+    return password.model === confirmPassword.model;
   }
 
-  isEmailValid(model: NgModel): boolean {
-    const regex = new RegExp('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$');
-    if (model.touched && !regex.test(model.model)) {
-      return false;
-    }
-    return true;
+  validatePasswordSmallLetters(model: NgModel): boolean {
+    const regex = new RegExp('[a-z]');
+    return regex.test(model.model);
+  }
+
+  validatePasswordCapitalLetters(model: NgModel): boolean {
+    const regex = new RegExp('[A-Z]');
+    return regex.test(model.model);
+  }
+
+  validatePasswordNonAlphaNumeric(model: NgModel): boolean {
+    const regex = new RegExp('[^a-zA-Z\\d\\s:]');
+    return regex.test(model.model);
+  }
+
+  validatePasswordDigit(model: NgModel): boolean {
+    const regex = new RegExp('[0-9]');
+    return regex.test(model.model);
   }
 
   ngOnInit(): void {

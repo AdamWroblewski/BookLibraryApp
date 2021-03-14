@@ -1,22 +1,52 @@
 <h4 class="text-center">Register</h4>
-<form #form="ngForm" autocomplete="off" class="col-lg-6" (submit)="register(form)">
-  <div class="form-group">
-    <label>Login</label>
-    <input class="form-control" #userName="ngModel" name="userName" [(ngModel)]="userService.userRegister.userName">
-    <div class="text-danger" *ngIf="!isLoginValid(userName)">Login require min length of 6</div>
+<form #form="ngForm" autocomplete="off" class="col-lg-10 offset-1" (submit)="register(form)">
+  <div ngModelGroup="registerData" #x="ngModelGroup">
+    <div class="form-group">
+      <label>Login</label>
+      <input required minlength="6" pattern="[a-zA-z]*" class="form-control" #userName="ngModel" name="userName"
+             [(ngModel)]="userService.userRegister.userName">
+      <div class="text-danger" *ngIf="!userName.valid && userName.touched">Login require min length of 6, only small and
+        capital letters
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" #email="ngModel"
+             name="emailAddress"
+             [(ngModel)]="userService.userRegister.emailAddress">
+      <div class="text-danger" *ngIf="!email.valid && email.touched">That's not a valid email address</div>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <input pattern="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,})$" type="password"
+             class="form-control" name="password" #password="ngModel"
+             [(ngModel)]="userService.userRegister.password">
+      <div *ngIf="password.touched">
+        <div class="text-danger"
+             *ngIf="password.model.length < 8">{{passwordErrors.numberOfLetters}}</div>
+        <div class="text-danger"
+             *ngIf="!validatePasswordSmallLetters(password)">{{passwordErrors.smallLetters}}</div>
+        <div class="text-danger"
+             *ngIf="!validatePasswordCapitalLetters(password)">{{passwordErrors.capitalLetters}}</div>
+        <div class="text-danger"
+             *ngIf="!validatePasswordNonAlphaNumeric(password)">{{passwordErrors.specialSymbol}}</div>
+        <div class="text-danger"
+             *ngIf="!validatePasswordDigit(password)">{{passwordErrors.digit}}</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Repeat password</label>
+      <input type="password" class="form-control" name="confirmPassword" #confirmPassword="ngModel"
+             [(ngModel)]="userService.userRegister.confirmPassword">
+      <div class="text-danger" *ngIf="!isRepeatPasswordValid(password, confirmPassword)
+    && password.touched && confirmPassword.touched">
+        Passwords are not the same
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label>Email</label>
-    <input class="form-control" #email="ngModel" name="emailAddress" [(ngModel)]="userService.userRegister.emailAddress">
-    <div class="text-danger" *ngIf="!isEmailValid(email)">Thats not a valid email address</div>
-  </div>
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" class="form-control" name="password" [(ngModel)]="userService.userRegister.password">
-  </div>
-  <div class="form-group">
-    <label>Repeat password</label>
-    <input type="password" class="form-control" name="confirmPassword" [(ngModel)]="userService.userRegister.confirmPassword">
-  </div>
-  <button type="submit" class="btn btn-primary mt-4 w-100">Submit</button>
+  <button
+    [disabled]="!(form.valid && password.value === confirmPassword.value && password.value!='' && confirmPassword.value!='')"
+    type="submit" class="btn btn-primary mt-4 w-100">
+    Submit
+  </button>
 </form>
