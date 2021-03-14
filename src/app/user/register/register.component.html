@@ -4,10 +4,11 @@
     <div class="form-group">
       <label>Login</label>
       <input required minlength="6" pattern="[a-zA-z]*" class="form-control" #userName="ngModel" name="userName"
-             [(ngModel)]="userService.userRegister.userName">
+             [(ngModel)]="userService.userRegister.userName" (ngModelChange)="isUserNameValid(userName)">
       <div class="text-danger" *ngIf="!userName.valid && userName.touched">Login require min length of 6, only small and
         capital letters
       </div>
+      <div class="text-danger" *ngIf="userNameTaken">Login is already taken</div>
     </div>
     <div class="form-group">
       <label>Email</label>
@@ -45,7 +46,8 @@
     </div>
   </div>
   <button
-    [disabled]="!(form.valid && password.value === confirmPassword.value && password.value!='' && confirmPassword.value!='')"
+    [disabled]="!(form.valid && password.value === confirmPassword.value && password.value!='' && confirmPassword.value!=''
+    && !userNameTaken)"
     type="submit" class="btn btn-primary mt-4 w-100">
     Submit
   </button>

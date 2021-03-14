@@ -17,7 +17,7 @@
          *ngIf="(!password.valid && password.touched)
        || (invalidLogin && !password.dirty)">Password field can't be empty
     </div>
-    <button class="btn btn-primary w-100 mt-4">Login</button>
+    <button [disabled]="!form.valid" class="btn btn-primary w-100 mt-4">Login</button>
   </div>
   <div class="text-danger mt-2" role="alert" *ngIf="invalidLogin">
     Wrong login or password

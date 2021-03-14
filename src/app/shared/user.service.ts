@@ -23,4 +23,8 @@ export class UserService {
   public loginUser(): Observable<any> {
     return this.http.post(`${this.appUrl}/authenticate`, this.userLogin);
   }
+
+  public isUserNameValid(): Observable<any> {
+    return this.http.get(`${this.appUrl}/validatename/${this.userRegister.userName}`);
+  }
 }
