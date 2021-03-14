@@ -9,7 +9,6 @@ import {FormsModule} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 import {LoginComponent} from './user/login/login.component';
 import {RegisterComponent} from './user/register/register.component';
-import {AppRoutingModule} from './app-routing.module';
 import {RouterModule, Routes} from '@angular/router';
 import {UserComponent} from './user/user.component';
 import {JwtModule} from '@auth0/angular-jwt';
@@ -39,7 +38,6 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule,
     RouterModule.forRoot(routes),
     JwtModule.forRoot({
       config: {
