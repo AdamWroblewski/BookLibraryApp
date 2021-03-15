@@ -1,27 +1,28 @@
 # BookLibraryApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.3.
+## About The Project
 
-## Development server
+### Built With
+- [Angular 11](https://angular.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [HTML](https://www.w3.org/html/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### The main goal of this project was to learn how to:
+- work with Angular
+- write in TypeScript
+- perform CRUD operations on backend api
+- authenticate user in client-server architecture
+- use Json Web Tokens
 
-## Code scaffolding
+## Usage
+When user loads the main page he has options to sign in or create new account. There is basic validation on inputs, such as required field, email in specific format or requirements for passwords (one small and capital letter, one number and one non alphanumeric symbol, min lenght 8). There is also validation for login and email with backed if they are already taken.
+![image](https://user-images.githubusercontent.com/49397084/111169358-2a410600-85a3-11eb-961a-0d83edd9c8f9.png)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+After successfuly authentication user will see book management page. He can fill inputs and then submit button will be active, after clicking it book will be added.
+It is possible to click on book from list, then input will be filled with its values, after perform changes on it and click submit its original values will be updated.
+After click on bin icon the book will remove from database.
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+After successful authentication, the user will see the book management page. He can fill the inputs, then the submit button will be active, after clicking it the book will be added.
+You can click on a book from the list, then the form inputs will be filled with its values, after making changes to it and clicking the submit button, its original values will be updated.
+When you click the bin icon, the book will be removed from the database.
+![image](https://user-images.githubusercontent.com/49397084/111171397-2f9f5000-85a5-11eb-876e-552b092cca81.png)
