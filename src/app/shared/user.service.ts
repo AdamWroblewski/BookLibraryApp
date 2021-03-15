@@ -25,6 +25,10 @@ export class UserService {
   }
 
   public isUserNameValid(): Observable<any> {
-    return this.http.get(`${this.appUrl}/validatename/${this.userRegister.userName}`);
+    return this.http.get(`${this.appUrl}/is-name-taken/${this.userRegister.userName}`);
+  }
+
+  public isEmailTaken(): Observable<any> {
+    return this.http.get(`${this.appUrl}/is-email-taken/${this.userRegister.emailAddress}`);
   }
 }

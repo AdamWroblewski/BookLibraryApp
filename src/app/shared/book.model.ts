@@ -2,6 +2,6 @@ export class Book {
   id = 0;
   author = '';
   title = '';
-  releaseYear: number;
-  numberOfPages: number;
+  releaseYear: number | undefined;
+  numberOfPages: number | undefined;
 }

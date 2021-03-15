@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../shared/user.service';
 import {NgForm, NgModel} from '@angular/forms';
-import {UserRegister} from '../../shared/user-register.model';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +14,7 @@ export class RegisterComponent implements OnInit {
 
   isFormInvalid = false;
   userNameTaken = false;
+  emailTaken = false;
 
   passwordErrors = {
     numberOfLetters: 'Password must contain at least 8 characters',
@@ -37,6 +37,17 @@ export class RegisterComponent implements OnInit {
       this.userService.isUserNameValid()
         .subscribe(result => {
             this.userNameTaken = result as boolean;
+          },
+          error => console.log(error));
+    }
+  }
+
+  isEmailTaken(email: NgModel): void {
+    if (email.value !== '') {
+      this.userService.isEmailTaken()
+        .subscribe(result => {
+            console.log(result as boolean);
+            this.emailTaken = result as boolean;
           },
           error => console.log(error));
     }

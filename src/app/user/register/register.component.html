@@ -14,8 +14,9 @@
       <label>Email</label>
       <input required pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" class="form-control" #email="ngModel"
              name="emailAddress"
-             [(ngModel)]="userService.userRegister.emailAddress">
+             [(ngModel)]="userService.userRegister.emailAddress" (ngModelChange)="isEmailTaken(email)">
       <div class="text-danger" *ngIf="!email.valid && email.touched">That's not a valid email address</div>
+      <div class="text-danger" *ngIf="emailTaken">Email is already taken</div>
     </div>
     <div class="form-group">
       <label>Password</label>
@@ -47,7 +48,7 @@
   </div>
   <button
     [disabled]="!(form.valid && password.value === confirmPassword.value && password.value!='' && confirmPassword.value!=''
-    && !userNameTaken)"
+    && !userNameTaken && !emailTaken)"
     type="submit" class="btn btn-primary mt-4 w-100">
     Submit
   </button>
