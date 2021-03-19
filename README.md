@@ -1,7 +1,7 @@
 # BookLibraryApp
 
 ## About The Project
-
+It is a client-side application used to communicate with the web api. Its basic functionalities are the ability to register, log in and manage a books.
 ### Built With
 - [Angular 11](https://angular.io/)
 - [TypeScript](https://www.typescriptlang.org/)
